@@ -1,0 +1,11 @@
+{
+  "name": "codenest",
+  "version": "1.0.0",
+  "description": "CodeNest - Developer Notes",
+  "main": "index.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "mongoose": "^7.8.3",
+    "node-fetch": "^2.7.0"
+  }
+}

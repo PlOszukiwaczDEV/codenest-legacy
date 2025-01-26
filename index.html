@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeNest - Developer Notes</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <!-- Login Page (Initially Hidden) -->
+    <div class="login-page hidden">
+        <div class="login-content">
+            <div class="logo-container">
+                <svg class="app-logo" viewBox="0 0 100 100">
+                    <path class="logo-path" d="M30 20 L45 10 L70 10 L85 25 L85 75 L70 90 L45 90 L30 80" />
+                </svg>
+            </div>
+            <h1>CodeNest</h1>
+            <p>Your personal space for organizing code snippets and development notes</p>
+            <button class="login-button" onclick="window.location.href='/login'">
+                Get Started
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" fill="none">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+            <p>Already have an account? <a href="/login">Login</a></p>
+        </div>
+        
+        <!-- Background elements for login page only -->
+        <div class="programming-elements">
+            <i class="programming-element fas fa-code"></i>
+            <i class="programming-element fas fa-terminal"></i>
+            <i class="programming-element fas fa-database"></i>
+            <i class="programming-element fas fa-laptop-code"></i>
+        </div>
+        
+        <div class="background">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </div>
+
+    <!-- Dashboard Container (Initially Hidden) -->
+    <div class="dashboard-container hidden">
+        <!-- Dashboard content will be dynamically inserted by notes.js -->
+    </div>
+
+    <script>
+    // Immediate auth check on page load
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            const response = await fetch('/api/auth-check');
+            const data = await response.json();
+            
+            if (data.authenticated) {
+                document.querySelector('.login-page').classList.add('hidden');
+                document.querySelector('.dashboard-container').classList.remove('hidden');
+                // Initialize the note manager and show dashboard
+                window.noteManager = new NoteManager();
+                NoteManager.showDashboard();
+            } else {
+                document.querySelector('.dashboard-container').classList.add('hidden');
+                document.querySelector('.login-page').classList.remove('hidden');
+            }
+        } catch (error) {
+            console.error('Auth check failed:', error);
+            document.querySelector('.dashboard-container').classList.add('hidden');
+            document.querySelector('.login-page').classList.remove('hidden');
+        }
+    });
+    </script>
+
+    <!-- Load your JavaScript files -->
+    <script src="js/notes.js"></script>
+    <script src="js/theme.js"></script>
+</body>
+</html> 

@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/api/auth/signup",
+      "dest": "/api/auth/signup.js"
+    },
+    {
+      "src": "/api/auth/login",
+      "dest": "/api/auth/login.js"
+    },
+    {
+      "src": "/api/auth-check",
+      "dest": "/api/auth-check.js"
+    },
+    {
+      "src": "/api/notes",
+      "dest": "/api/notes/[...route].js"
+    },
+    {
+      "src": "/api/notes/(.*)",
+      "dest": "/api/notes/[...route].js"
+    },
+    {
+      "src": "/utils/(.*)",
+      "dest": "/utils/$1.js"
+    },
+    {
+      "src": "/login",
+      "dest": "/login.html"
+    },
+    {
+      "src": "/signup",
+      "dest": "/signup.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "functions": {
+    "api/auth/*.js": {
+      "memory": 1024,
+      "maxDuration": 60
+    }
+  }
+} 
